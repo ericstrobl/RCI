@@ -24,7 +24,8 @@ Create a dataset of 1000 samples from the DAG:
 
 Run the RCI algorithm and print the Shapley values. Note that the column names correspond to the variable number in X:
 
-> out = RCR(X,Y)
+> out = RCI(X,Y)
+
 > print(out$Shapley)
 
 
