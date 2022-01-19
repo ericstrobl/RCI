@@ -19,6 +19,7 @@ Generate a random DAG with 10 variables and an expected neighborhood size of 2:
 Create a dataset of 1000 samples from the DAG:
 
 > data = sample_DAG_Y(1000,G)
+
 > X = data$data[,-X$Y]; Y = data$data[,X$Y]
 
 Run the RCI algorithm and print the Shapley values. Note that the column names correspond to the variable number in X:
