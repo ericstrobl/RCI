@@ -1,4 +1,4 @@
-data = read.csv('FHS.csv')
+data = read.csv('FHS.csv') #requires prior authorization from https://biolincc.nhlbi.nih.gov/studies/framcohort/
 data = data[,-c(5,13,21)]
 data = as.matrix(data[complete.cases(data),])
 BMI = 25
