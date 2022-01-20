@@ -8,7 +8,7 @@ The academic article describing RCI in detail can be found [here](https://www.go
 
 > library(devtools)
 
-> install_github("ericstrobl/RCI")
+> install_local("Directory of RCI-main.zip")
 
 > library(RCI)
 
