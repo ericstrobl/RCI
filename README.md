@@ -24,7 +24,7 @@ Create a dataset of 1000 samples from the DAG:
 
 > X = data$data[,-X$Y]; Y = data$data[,X$Y]
 
-Run the RCI algorithm and print the Shapley values. Note that the column names correspond to the variable order in _X_:
+Run the RCI algorithm and print the Shapley values. Note that the column names correspond to the variable order in _X_.
 
 > out = RCI(X,Y)
 
