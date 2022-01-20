@@ -3,7 +3,7 @@
 #' @param X a matrix of continuous variables, rows are samples and columns are variables
 #' @param Y a vector of a binary target
 #' @param alpha the alpha value for the t-test, default is 0.2
-#' @return A list containing Shapley values \code{scores}, the errors \code{E}, the variable ordering \code{K}, and time of Local Plus \code{time}
+#' @return A list containing Shapley values \code{scores}, the errors \code{E}, the variable ordering \code{order}, and time of Local Plus \code{time}
 #' @export
 
 RCI <- function(X,Y,alpha=0.2){
