@@ -3,7 +3,7 @@ Type: Package
 Title: Root Causal Inference
 Version: 0.1.0
 Author: Anonymous
-Maintainer: Anonymous
+Maintainer: Anonymous <anonymous@gmail.com>
 Description: See README
 Depends: MASS, ica, glmnet, randomForest, bnlearn, RcppHungarian, survival
 License: CC BY-NC 4.0
