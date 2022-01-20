@@ -2,7 +2,7 @@ library(survival)
 id = (pbc[,3]!=1) & complete.cases(pbc)
 Xo = pbc[id,c(5,11:19)]
 X = normalizeData(Xo)
-Y = 0+(pbc[id,3]>0) # patient would have died if not transplants, so 0 = alive, 1 = dead or transplant
+Y = 0+(pbc[id,3]>0)
 
 reps = 1000
 
