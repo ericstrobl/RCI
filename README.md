@@ -12,11 +12,11 @@ The academic article describing RCI in detail can be found [here](https://www.go
 
 > library(RCI)
 
-# Toy Example
+# Example
 
 Generate a random DAG with 10 variables and an expected neighborhood size of 2:
 
-> G = generate_DAG(ps[p],en=2)
+> G = generate_DAG(10,en=2)
 
 Create a dataset of 1000 samples from the DAG:
 
