@@ -22,7 +22,6 @@ for (i in 1:reps){
       G = generate_DAG(ps[p],en=2)
       Gs[[i]][[n]][[p]] = G
       X = sample_DAG_Y(ns[n],G)
-      # X = sample_DAG_Y(1E5,G)
       # print(X$Y)
       # plot(as(G$graph,"graphNEL"))
       
