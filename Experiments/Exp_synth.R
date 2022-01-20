@@ -4,8 +4,8 @@ np = length(ps)
 reps = 100
 
 Gs = lapply(1:reps, function(.) lapply(1:length(ns),function(.) vector("list",np)))
-RCR_res = Gs
-RCR_noY_res = Gs
+RCI_res = Gs
+RCI_noY_res = Gs
 ICA_res = Gs
 CO_res = Gs
 MS_res = Gs
@@ -52,21 +52,21 @@ for (i in 1:reps){
       ### RUN ALGORITHMS
       ptm <- proc.time()
       out = RCI(X$data[,-X$Y],X$data[,X$Y])
-      RCR_res[[i]][[n]][[p]]$time = (proc.time() - ptm)[3]
-      RCR_res[[i]][[n]][[p]]$rank_overlap = eval_scores(truth,out)
-      RCR_res[[i]][[n]][[p]]$L2 = eval_L2(truth,out)
-      RCR_res[[i]][[n]][[p]]$time_LiNGAM = out$time
+      RCI_res[[i]][[n]][[p]]$time = (proc.time() - ptm)[3]
+      RCI_res[[i]][[n]][[p]]$rank_overlap = eval_scores(truth,out)
+      RCI_res[[i]][[n]][[p]]$L2 = eval_L2(truth,out)
+      RCI_res[[i]][[n]][[p]]$time_LiNGAM = out$time
 
       ptm <- proc.time()
       out = RCI_noY(X$data[,-X$Y],X$data[,X$Y])
-      RCR_noY_res[[i]][[n]][[p]]$time = (proc.time() - ptm)[3]
-      RCR_noY_res[[i]][[n]][[p]]$rank_overlap = eval_scores(truth,out)
-      RCR_noY_res[[i]][[n]][[p]]$L2 = eval_L2(truth,out)
-      RCR_noY_res[[i]][[n]][[p]]$time_LiNGAM_fast = out$time
+      RCI_noY_res[[i]][[n]][[p]]$time = (proc.time() - ptm)[3]
+      RCI_noY_res[[i]][[n]][[p]]$rank_overlap = eval_scores(truth,out)
+      RCI_noY_res[[i]][[n]][[p]]$L2 = eval_L2(truth,out)
+      RCI_noY_res[[i]][[n]][[p]]$time_LiNGAM_fast = out$time
 
       out = LiNGAM_times(X$data[,-X$Y],X$data[,X$Y])
-      RCR_res[[i]][[n]][[p]]$time_LiNGAM_slow_Y = out$time1
-      # RCR_res[[i]][[n]][[p]]$time_LiNGAM_fast = out$time2
+      RCI_res[[i]][[n]][[p]]$time_LiNGAM_slow_Y = out$time1
+      # RCI_res[[i]][[n]][[p]]$time_LiNGAM_fast = out$time2
       
       ptm <- proc.time()
       out = ICA_predict(X$data[,-X$Y],X$data[,X$Y])
@@ -116,7 +116,7 @@ for (i in 1:reps){
 
 
       ## SAVE RESULTS
-      save(file="Results_synthetic.RData",Gs,RCR_res,RCR_noY_res,ICA_res,
+      save(file="Results_synthetic.RData",Gs,RCI_res,RCI_noY_res,ICA_res,
            CO_res,MS_res,HPC_res,TT_res,LR_res)
       
     }
@@ -126,21 +126,21 @@ for (i in 1:reps){
 ####
 ## RBO RESULTS
 
-RBO_RCR = matrix(0,length(ns),length(ps))
-RBO_noY_RCR = matrix(0,length(ns),length(ps))
-RBO_ICA = RBO_RCR
-RBO_CO = RBO_RCR
-RBO_MS = RBO_RCR
-RBO_HPC = RBO_RCR
-RBO_TT = RBO_RCR
-RBO_LR = RBO_RCR
+RBO_RCI = matrix(0,length(ns),length(ps))
+RBO_noY_RCI = matrix(0,length(ns),length(ps))
+RBO_ICA = RBO_RCI
+RBO_CO = RBO_RCI
+RBO_MS = RBO_RCI
+RBO_HPC = RBO_RCI
+RBO_TT = RBO_RCI
+RBO_LR = RBO_RCI
 
 for (i in 1:reps){
   for (n in 1:length(ns)){
     for (p in 1:length(ps)){
       
-      RBO_RCR[n,p] = RBO_RCR[n,p] + RCR_res[[i]][[n]][[p]]$rank_overlap
-      RBO_noY_RCR[n,p] = RBO_noY_RCR[n,p] + RCR_noY_res[[i]][[n]][[p]]$rank_overlap
+      RBO_RCI[n,p] = RBO_RCI[n,p] + RCI_res[[i]][[n]][[p]]$rank_overlap
+      RBO_noY_RCI[n,p] = RBO_noY_RCI[n,p] + RCI_noY_res[[i]][[n]][[p]]$rank_overlap
       RBO_ICA[n,p] = RBO_ICA[n,p] + ICA_res[[i]][[n]][[p]]$rank_overlap
       RBO_CO[n,p] = RBO_CO[n,p] + CO_res[[i]][[n]][[p]]$rank_overlap
       RBO_MS[n,p] = RBO_MS[n,p] + MS_res[[i]][[n]][[p]]$rank_overlap
@@ -153,8 +153,8 @@ for (i in 1:reps){
   }
 }
 
-print(RBO_RCR/reps)
-print(RBO_noY_RCR/reps)
+print(RBO_RCI/reps)
+print(RBO_noY_RCI/reps)
 print(RBO_ICA/reps)
 print(RBO_CO/reps)
 print(RBO_MS/reps)
@@ -166,21 +166,21 @@ print(RBO_LR/reps)
 ######
 ## MSE RESULTS
 
-MSE_RCR = matrix(0,length(ns),length(ps))
-MSE_noY_RCR = MSE_RCR
-MSE_ICA = MSE_RCR
-MSE_CO = MSE_RCR
-MSE_MS = MSE_RCR
-MSE_HPC = MSE_RCR
-MSE_TT = MSE_RCR
-MSE_LR = MSE_RCR
+MSE_RCI = matrix(0,length(ns),length(ps))
+MSE_noY_RCI = MSE_RCI
+MSE_ICA = MSE_RCI
+MSE_CO = MSE_RCI
+MSE_MS = MSE_RCI
+MSE_HPC = MSE_RCI
+MSE_TT = MSE_RCI
+MSE_LR = MSE_RCI
 
 for (i in 1:100){
   for (n in 1:length(ns)){
     for (p in 1:length(ps)){
       
-      MSE_RCR[n,p] = MSE_RCR[n,p] + RCR_res[[i]][[n]][[p]]$L2
-      MSE_noY_RCR[n,p] = MSE_noY_RCR[n,p] + RCR_noY_res[[i]][[n]][[p]]$L2
+      MSE_RCI[n,p] = MSE_RCI[n,p] + RCI_res[[i]][[n]][[p]]$L2
+      MSE_noY_RCI[n,p] = MSE_noY_RCI[n,p] + RCI_noY_res[[i]][[n]][[p]]$L2
       MSE_ICA[n,p] = MSE_ICA[n,p] + ICA_res[[i]][[n]][[p]]$L2
       MSE_CO[n,p] = MSE_CO[n,p] + CO_res[[i]][[n]][[p]]$L2
       MSE_MS[n,p] = MSE_MS[n,p] + MS_res[[i]][[n]][[p]]$L2
@@ -193,9 +193,9 @@ for (i in 1:100){
   }
 }
 
-print(MSE_RCR/reps)
-print(rowMeans(MSE_RCR/reps))
-print(rowMeans(MSE_noY_RCR/reps))
+print(MSE_RCI/reps)
+print(rowMeans(MSE_RCI/reps))
+print(rowMeans(MSE_noY_RCI/reps))
 print(MSE_ICA/reps)
 print(MSE_CO/reps)
 print(MSE_MS/reps)
@@ -216,9 +216,9 @@ for (i in 1:100){
   for (n in 1:length(ns)){
     for (p in 1:length(ps)){
       
-      Time_local_plus[n,p] = Time_local_plus[n,p] + RCR_res[[i]][[n]][[p]]$time_LiNGAM
-      Time_plus[n,p] = Time_plus[n,p] + RCR_noY_res[[i]][[n]][[p]]$time_LiNGAM_fast
-      Time_local[n,p] = Time_local[n,p] + RCR_res[[i]][[n]][[p]]$time_LiNGAM_slow_Y
+      Time_local_plus[n,p] = Time_local_plus[n,p] + RCI_res[[i]][[n]][[p]]$time_LiNGAM
+      Time_plus[n,p] = Time_plus[n,p] + RCI_noY_res[[i]][[n]][[p]]$time_LiNGAM_fast
+      Time_local[n,p] = Time_local[n,p] + RCI_res[[i]][[n]][[p]]$time_LiNGAM_slow_Y
       Time_original[n,p] = Time_original[n,p] + CO_res[[i]][[n]][[p]]$time_ICA
       
       
