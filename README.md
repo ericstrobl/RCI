@@ -26,6 +26,6 @@ Run the RCI algorithm and print the Shapley values. Note that the column names c
 
 > out = RCI(X,Y)
 
-> print(out$Shapley)
+> print(out$scores)
 
 
