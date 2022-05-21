@@ -174,6 +174,7 @@ MSE_HPC = MSE_RCI
 MSE_TT = MSE_RCI
 MSE_LR = MSE_RCI
 
+cnt = 0
 for (i in 1:100){
   for (n in 1:length(ns)){
     for (p in 1:length(ps)){
@@ -182,7 +183,10 @@ for (i in 1:100){
       MSE_noY_RCI[n,p] = MSE_noY_RCI[n,p] + RCI_noY_res[[i]][[n]][[p]]$L2
       MSE_ICA[n,p] = MSE_ICA[n,p] + ICA_res[[i]][[n]][[p]]$L2
       MSE_CO[n,p] = MSE_CO[n,p] + CO_res[[i]][[n]][[p]]$L2
-      MSE_MS[n,p] = MSE_MS[n,p] + MS_res[[i]][[n]][[p]]$L2
+      if (!is.na(MS_res[[i]][[n]][[p]]$L2)){
+        cnt = cnt + 1
+        MSE_MS[n,p] = MSE_MS[n,p] + (MS_res[[i]][[n]][[p]]$L2 - MSE_MS[n,p])/cnt
+      }
       MSE_HPC[n,p] = MSE_HPC[n,p] + HPC_res[[i]][[n]][[p]]$L2
       MSE_TT[n,p] = MSE_TT[n,p] + TT_res[[i]][[n]][[p]]$L2
       MSE_LR[n,p] = MSE_LR[n,p] + LR_res[[i]][[n]][[p]]$L2
@@ -197,7 +201,7 @@ print(rowMeans(MSE_RCI/reps))
 print(rowMeans(MSE_noY_RCI/reps))
 print(MSE_ICA/reps)
 print(MSE_CO/reps)
-print(MSE_MS/reps)
+print(MSE_MS)
 print(MSE_HPC/reps)
 print(MSE_TT/reps)
 print(MSE_LR/reps)
