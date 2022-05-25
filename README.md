@@ -2,7 +2,7 @@
 
 RCI is an algorithm that discovers the root causes of disease in a patient-specific manner. The algorithm extracts mutually independent errors from the data assuming that the causal relations can be summarized using a linear structural equation model. RCI then outputs patient-specific Shapley values of the log-odds using logistic regression.
 
-The academic article describing RCI in detail can be found [here](https://www.google.com](https://arxiv.org/abs/2205.11627). The ``Experiments`` folder contains code to replicate the experimental results in the paper. Please cite the article if you use any of the code in this repository ([Bibtex](https://www.google.com)).
+The academic article describing RCI in detail can be found [here](https://arxiv.org/abs/2205.11627). The ``Experiments`` folder contains code to replicate the experimental results in the paper. Please cite the article if you use any of the code in this repository ([Bibtex](https://www.google.com)).
 
 # Installation
 
